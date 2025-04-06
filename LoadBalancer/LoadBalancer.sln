@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer", "LoadBalancer\LoadBalancer.csproj", "{BF67A49D-B5A1-4917-AF40-798E84D2A094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test1", "test1\test1.csproj", "{63557FF0-2194-4F3F-8329-B8414696DE19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test2", "test2\test2.csproj", "{F1DF955A-0A6D-4DEB-8254-2CDFCCC330A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test3", "test3\test3.csproj", "{8CB4996C-4614-4C1D-80F7-62BB14B86655}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC490375-2150-4F3C-B7FA-196104E1DB1C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+		prometheus.yml = prometheus.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF67A49D-B5A1-4917-AF40-798E84D2A094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF67A49D-B5A1-4917-AF40-798E84D2A094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF67A49D-B5A1-4917-AF40-798E84D2A094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF67A49D-B5A1-4917-AF40-798E84D2A094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63557FF0-2194-4F3F-8329-B8414696DE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63557FF0-2194-4F3F-8329-B8414696DE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63557FF0-2194-4F3F-8329-B8414696DE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63557FF0-2194-4F3F-8329-B8414696DE19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1DF955A-0A6D-4DEB-8254-2CDFCCC330A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DF955A-0A6D-4DEB-8254-2CDFCCC330A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DF955A-0A6D-4DEB-8254-2CDFCCC330A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1DF955A-0A6D-4DEB-8254-2CDFCCC330A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB4996C-4614-4C1D-80F7-62BB14B86655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB4996C-4614-4C1D-80F7-62BB14B86655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB4996C-4614-4C1D-80F7-62BB14B86655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB4996C-4614-4C1D-80F7-62BB14B86655}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
