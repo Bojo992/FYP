@@ -31,3 +31,25 @@
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_NAME=Main Org.
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234 
+      MYSQL_DATABASE: messages
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+  
+volumes:
+  db_data:
+  
+networks:
+  app_network:
+    driver: bridge

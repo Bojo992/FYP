@@ -15,30 +15,45 @@ public sealed class TestLoadBalancingPolicy : ILoadBalancingPolicy
     public DestinationState? PickDestination(HttpContext context, ClusterState cluster, IReadOnlyList<DestinationState> availableDestinations)
     {
         checkForNewDestinations(cluster);
+       
+        var ipAddress = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+       
+        if (string.IsNullOrEmpty(ipAddress))
+        {
+           ipAddress = context.Connection.RemoteIpAddress?.ToString();
+        }
         
         using var sha256 = SHA256.Create();
-        var bytes = Encoding.UTF8.GetBytes(context.Connection.RemoteIpAddress.ToString());
+        var bytes = Encoding.UTF8.GetBytes(ipAddress);
         var hashBytes = sha256.ComputeHash(bytes);
-        var userIp =  Convert.ToHexString(hashBytes);
+        var userIp = Convert.ToHexString(hashBytes);
 
         if (_userDirections.TryGetValue(userIp, out var direction))
         {
-            cluster.Destinations.TryGetValue(direction, out var destinationState);
-            return destinationState;
+            if (cluster.Destinations.TryGetValue(direction, out var destinationState))
+            {
+                return destinationState;
+            }
         }
         else
         {
-            var suitableDestination = _destinations
+            var suitableDestinations = _destinations
                 .Where(kvp => kvp.Value == _destinations.Min(c => c.Value))
                 .Select(kvp => kvp)
-                .OrderBy(k => k.Key)
-                .First();
+                .ToList();
             
-            _userDirections.Add(userIp, suitableDestination.Key);
-            _destinations.TryAdd(suitableDestination.Key, suitableDestination.Value + 1);
-            
-            return cluster.Destinations[suitableDestination.Key];
+            var randomDestination = suitableDestinations[new Random().Next(suitableDestinations.Count)];
+
+            _userDirections.Add(userIp, randomDestination.Key);
+            _destinations[randomDestination.Key] = randomDestination.Value + 1;
+
+            if (cluster.Destinations.TryGetValue(randomDestination.Key, out var destinationState))
+            {
+                return destinationState;
+            }
         }
+        
+        return null; 
     }
 
     private void checkForNewDestinations(ClusterState availableDestinations)

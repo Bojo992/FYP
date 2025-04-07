@@ -1,4 +1,5 @@
 using Destination_server.Controller;
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 // Configure CORS
@@ -14,6 +15,9 @@ builder.Services.AddCors(options =>
         // .AllowCredentials();
     });
 });
+
+builder.Services.AddMySqlDataSource(builder.Configuration.GetConnectionString("Default")!);
+
 // Add SignalR services
 builder.Services.AddSignalR();
 var app = builder.Build();
